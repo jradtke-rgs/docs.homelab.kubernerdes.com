@@ -11,8 +11,8 @@ const config = {
     v4: true,
   },
 
-  url: 'https://jradtke-rgs.github.io',
-  baseUrl: '/docs.homelab.kubernerdes.com/',
+  url: 'https://docs.homelab.kubernerdes.com',
+  baseUrl: '/',
 
   organizationName: 'jradtke-rgs',
   projectName: 'docs.homelab.kubernerdes.com',
