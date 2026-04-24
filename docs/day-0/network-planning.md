@@ -76,6 +76,40 @@ ISC `dhcpd` on `nuc-00-01` handles:
 
 See [PXE Boot](../day-1/pxe-boot.md) for the full boot flow.
 
+## Kubernetes Internal Networks
+
+Kubernetes (via RKE2) uses two internal networks that are entirely software-defined and never appear on the physical switch. You must ensure these CIDRs do **not** overlap with any physical network segment — including your home/lab router's subnet, the management CIDR above, or any VPN ranges in use.
+
+| Network | Purpose | Default CIDR |
+|:--------|:--------|:------------|
+| Pod Network (CNI) | Routable address space for every pod across all nodes | `10.42.0.0/16` (RKE2/K3s default) |
+| Service Network (ClusterIP) | Virtual IPs assigned to Kubernetes Services | `10.43.0.0/16` (RKE2/K3s default) |
+
+> **Harvester note:** The embedded Harvester management cluster uses `10.52.0.0/16` (pod) and `10.53.0.0/16` (service) to avoid colliding with downstream cluster defaults. Downstream clusters provisioned by Rancher Manager on top of Harvester use the RKE2 defaults above unless overridden.
+
+### Avoiding Overlap With Your Physical Network
+
+If your home or lab router already uses `10.42.x.x` or `10.43.x.x` address space, you **must** choose alternate CIDRs before installation — these values cannot be changed after a cluster is bootstrapped.
+
+Common conflict scenarios and suggested alternates:
+
+| Conflicting physical range | Suggested pod CIDR | Suggested service CIDR |
+|:--------------------------|:------------------|:----------------------|
+| `10.42.0.0/16` in use | `172.20.0.0/16` | `172.21.0.0/16` |
+| `10.0.0.0/8` fully in use | `192.168.128.0/17` | `192.168.64.0/18` |
+
+To override during cluster provisioning, set `cluster-cidr` and `service-cidr` in the RKE2 config before the first node joins.
+
+### Summary of All CIDRs to Plan
+
+| Layer | CIDR | Notes |
+|:------|:-----|:------|
+| Physical / management | `10.0.0.0/22` (Community) | Set in `env.sh` — must be routable on your switch |
+| Harvester pod network | `10.52.0.0/16` | Internal only; never leave the host |
+| Harvester service network | `10.53.0.0/16` | Internal only; virtual IPs inside Harvester |
+| Downstream pod network | `10.42.0.0/16` | Adjust if conflict exists |
+| Downstream service network | `10.43.0.0/16` | Adjust if conflict exists |
+
 ## Pre-Deployment Checklist
 
 - [ ] Uplink internet access is available on port 16 of the switch
@@ -83,3 +117,4 @@ See [PXE Boot](../day-1/pxe-boot.md) for the full boot flow.
 - [ ] Your router/gateway assigns `${IP_PREFIX}.1` as the default gateway
 - [ ] No existing DHCP server is active on the network segment
 - [ ] DNS for `${BASE_DOMAIN}` will be served by `nuc-00-01` (not delegated externally)
+- [ ] Pod CIDR (`10.42.0.0/16`) and Service CIDR (`10.43.0.0/16`) do not overlap with any physical network, VPN, or home-router subnet in your environment
