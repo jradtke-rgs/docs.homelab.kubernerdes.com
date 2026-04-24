@@ -43,6 +43,7 @@ const sidebars = {
       items: [
         'day-2/environment-switching',
         'day-2/monitoring',
+        'day-2/lab-management',
         'day-2/troubleshooting',
       ],
     },

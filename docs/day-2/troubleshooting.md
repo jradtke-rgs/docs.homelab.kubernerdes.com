@@ -2,7 +2,7 @@
 id: troubleshooting
 title: Troubleshooting
 sidebar_label: Troubleshooting
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 # Troubleshooting
