@@ -38,7 +38,7 @@ Community is the base environment — using upstream SUSE tooling pulled directl
 
 ## Carbide
 
-Carbide uses RGS (Rancher Government Solutions) hardened container images pulled from the RGS registry (`rgcrprod.azurecr.us`) over the internet.
+Carbide uses RGS (Rancher Government Solutions) hardened container images pulled from the RGS registry (`registry.ranchercarbide.dev`) over the internet.
 
 **Use when:**
 - Demonstrating RGS Carbide to customers or colleagues
@@ -53,7 +53,7 @@ Carbide uses RGS (Rancher Government Solutions) hardened container images pulled
 
 **Carbide-specific prerequisites:**
 - RGS Carbide portal account — request from the RGS Account Team
-- `rgcrprod.azurecr.us` credentials stored in `Scripts/env.d/carbide.sh`
+- `registry.ranchercarbide.dev` credentials stored in `~/.config/RGS.creds` on the admin node
 
 ---
 
