@@ -67,7 +67,7 @@ Common issues and diagnostic steps.
    ```bash
    ssh ${IP_PREFIX}.93 systemctl status haproxy
    ```
-3. Verify Rancher K3s VMs are running inside Harvester
+3. Verify Rancher RKE2 VMs are running inside Harvester
 
 ### `cert-manager` webhook failures
 

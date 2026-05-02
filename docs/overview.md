@@ -60,7 +60,7 @@ Harvester is installed via PXE boot: the admin host serves the Harvester install
 
 ### Layer 3 — Rancher Manager
 
-[Rancher Manager](https://rancher.com) is SUSE's multi-cluster Kubernetes management platform. In this homelab, it runs as a highly available K3s cluster inside Harvester — three VMs, each scheduled on a different Harvester node, fronted by a Keepalived VIP.
+[Rancher Manager](https://rancher.com) is SUSE's multi-cluster Kubernetes management platform. In this homelab, it runs as a highly available RKE2 cluster inside Harvester — three VMs, each scheduled on a different Harvester node, fronted by a HAProxy VIP.
 
 ### Layer 4 — RGS Carbide and Hauler (Carbide/Enclave only)
 
@@ -116,7 +116,7 @@ flowchart TD
         B --> E
         C --> E
         E["Harvester Cluster\nnuc-01 · nuc-02 · nuc-03\nPXE boot → automated install → cluster join"]
-        E --> F["Rancher Manager\nK3s HA cluster inside Harvester\ncert-manager → Rancher Helm deploy"]
+        E --> F["Rancher Manager\nRKE2 HA cluster inside Harvester\ncert-manager → Rancher Helm deploy"]
     end
 
     F --> D2

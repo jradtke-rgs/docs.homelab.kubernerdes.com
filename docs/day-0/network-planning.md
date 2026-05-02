@@ -82,8 +82,8 @@ Kubernetes (via RKE2) uses two internal networks that are entirely software-defi
 
 | Network | Purpose | Default CIDR |
 |:--------|:--------|:------------|
-| Pod Network (CNI) | Routable address space for every pod across all nodes | `10.42.0.0/16` (RKE2/K3s default) |
-| Service Network (ClusterIP) | Virtual IPs assigned to Kubernetes Services | `10.43.0.0/16` (RKE2/K3s default) |
+| Pod Network (CNI) | Routable address space for every pod across all nodes | `10.42.0.0/16` (RKE2 default) |
+| Service Network (ClusterIP) | Virtual IPs assigned to Kubernetes Services | `10.43.0.0/16` (RKE2 default) |
 
 > **Harvester note:** The embedded Harvester management cluster uses `10.52.0.0/16` (pod) and `10.53.0.0/16` (service) to avoid colliding with downstream cluster defaults. Downstream clusters provisioned by Rancher Manager on top of Harvester use the RKE2 defaults above unless overridden.
 

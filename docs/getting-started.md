@@ -15,7 +15,7 @@ A fully operational, on-premises Kubernetes platform consisting of:
 
 - **4× Intel NUC** nodes — one admin/bootstrap host plus a 3-node Harvester hypervisor cluster
 - **Harvester HCI** — open-source hyperconverged infrastructure for VMs and Kubernetes workloads
-- **Rancher Manager** — multi-cluster management UI deployed on a 3-node K3s cluster inside Harvester
+- **Rancher Manager** — multi-cluster management UI deployed on a 3-node RKE2 cluster inside Harvester
 - **Infrastructure services** — ISC DHCP, BIND DNS, HAProxy load balancer, Keepalived VIP failover
 - **Environment-specific layers** — Community (public registries), Carbide (RGS registry), or Enclave (air-gapped)
 
@@ -24,7 +24,7 @@ A fully operational, on-premises Kubernetes platform consisting of:
 | Environment | Best For | Registry Source |
 |:-----------:|:---------|:----------------|
 | **Community** | Getting started, upstream SUSE tooling | Docker Hub / public registries |
-| **Carbide** | RGS hardened images, internet-connected | `rgcrprod.azurecr.us` (RGS registry) |
+| **Carbide** | RGS hardened images, internet-connected | `registry.ranchercarbide.dev` (RGS registry) |
 | **Enclave** | Air-gapped operations, FIPS compliance | Local Harbor via Hauler |
 
 Start with **Community** if you're new to the platform. Community is the base layer — Carbide and Enclave build on top of it.
@@ -42,7 +42,7 @@ Start with **Community** if you're new to the platform. Community is the base la
 │  │                  │     │  VIP: ${IP_PREFIX}.100       │  │
 │  │ ┌──────────────┐ │     │  ┌──────────────────────┐    │  │
 │  │ │ nuc-00-01    │ │     │  │  rancher-01/02/03    │    │  │
-│  │ │ DHCP + DNS   │ │     │  │  K3s HA cluster      │    │  │
+│  │ │ DHCP + DNS   │ │     │  │  RKE2 HA cluster     │    │  │
 │  │ └──────────────┘ │     │  │  VIP: ${IP_PREFIX}.210│   │  │
 │  │ ┌──────────────┐ │     │  └──────────────────────┘    │  │
 │  │ │ nuc-00-02    │ │     │                              │  │

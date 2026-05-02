@@ -34,7 +34,7 @@ flowchart TD
     C["3a. (Enclave only)\nHauler sync + Harbor setup"]
     D["3b. (Carbide only)\nRegistry auth"]
     E["4. Harvester Cluster\nnuc-01 · nuc-02 · nuc-03\nPXE boot"]
-    F["5. Rancher Manager\nK3s HA · cert-manager"]
+    F["5. Rancher Manager\nRKE2 HA · cert-manager"]
 
     A --> B
     B --> C
